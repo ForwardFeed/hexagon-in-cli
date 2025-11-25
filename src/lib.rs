@@ -13,7 +13,7 @@ mod tests {
 use crate::hexagon_state::HexagonDrawState;
 
 mod hexagon_state;
-
+mod hexagon_grid;
 // width: 9
 const RAW_HEXAGON: [&str; 5] = [
     "   _ _   ",
@@ -32,6 +32,7 @@ pub fn create_hexagon(){
         HexagonDrawState::with_params(false, false, false, true, false, false),
         HexagonDrawState::with_params(false, false, false, false, true, false),
         HexagonDrawState::with_params(false, false, false, false, false, true),
+        HexagonDrawState::with_params(true, false, false, false, false, true),
     ];
     let mut textbuffer = String::new();
     for hexagon in hexagon_list{
