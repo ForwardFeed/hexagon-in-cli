@@ -39,6 +39,9 @@ impl HexagonDrawState {
             bot_left 
         }
     }
+    pub fn new_full() -> Self{
+        HexagonDrawState::with_params(true, true, true, true, true, true)
+    }
 }
 
 impl Debug for HexagonDrawState{
