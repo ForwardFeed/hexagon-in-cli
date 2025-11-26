@@ -27,15 +27,21 @@ impl HexagonGrid{
         }
     }
 
-    pub fn find_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+    pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock>{
         self.grid.iter().filter(|block|{
-            u16::abs_diff(block.x, x) + u16::abs_diff(block.y, y) <= 2
+            let diff = u16::abs_diff(block.x, x) + u16::abs_diff(block.y, y);
+            match diff{
+                0 => false,// because it found it self
+                1 => true,
+                2 => true,
+                _ => false
+            }
         }).collect::<Vec<&HexagonBlock>>()
     }
 
-    pub fn find_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+    pub fn get_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock>{
         let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
-        self.find_neighbors_of_with_hex_c(tx, ty)
+        self.get_neighbors_of_with_hex_c(tx, ty)
     }
 
     pub fn add_block_hex_c(&mut self, x: u16, y:u16) -> Result<(), HexagonGridError> {
