@@ -18,22 +18,23 @@ fn grid_test() -> Result<(), HexagonGridError>{
     grid.add_block_quad_c(0,0)?;
     grid.add_block_quad_c(0,0).expect_err("This shouldn't be adding a block at the same coords.");
     grid.add_block_hex_c(1, 1)?;
-    grid.add_block_quad_c(1,0).expect_err("This shouldn't be adding a block at the same coords especially with the translation system");
+    grid.add_block_quad_c(1,0).expect_err("This shouldn't be adding a block at the same coords because translation system");
 
     grid.add_block_hex_c(2, 2)?;
     grid.add_block_hex_c(3, 4)?;
     grid.add_block_hex_c(2, 1)?;
     grid.add_block_hex_c(3, 3)?;
-    // neighbors list: 1,1 2,1, 3,3
+
     let neighbors  =
         grid
             .get_neighbors_of_with_hex_c(2, 2)
             .into_iter()
             .map(|x|{(x.x, x.y)})
-            .collect::<Vec<(u16, u16)>>()
-            .into_boxed_slice();
+            .collect::<Vec<(u16, u16)>>();
     
     assert_eq!(*neighbors, [(1,1),(2,1), (3,3)]);
+    
+    assert_eq!(grid.get_hex_c_size(), (3,4));
 
     Ok(())
 }

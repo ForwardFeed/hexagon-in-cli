@@ -8,14 +8,22 @@ pub enum HexagonGridError {
 }
 
 pub struct HexagonGrid{
-    grid: Vec<HexagonBlock>
+    grid: Vec<HexagonBlock>,
+    max_x: u16,
+    max_y: u16
 }
 
 impl HexagonGrid{
     pub fn new() -> Self{
         HexagonGrid { 
-            grid: Vec::new()
+            grid: Vec::new(),
+            max_x: 0,
+            max_y: 0,
         }
+    }
+
+    pub fn get_hex_c_size(&self) -> (u16,u16){
+        (self.max_x, self.max_y)
     }
 
     fn find_block_with_hex_c(&self, x: u16, y:u16) -> bool{
@@ -51,6 +59,13 @@ impl HexagonGrid{
             },
             false => {
                 self.grid.push(HexagonBlock::new(x, y));
+                // modify if must, the grid size tracker
+                if self.max_x < x{
+                    self.max_x = x
+                }
+                if self.max_y < y{
+                    self.max_y = y
+                }
                 Ok(())
             },
         }
