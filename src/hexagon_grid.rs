@@ -88,7 +88,8 @@ impl HexagonGrid{
         }).collect::<QuadGrid>();
         // vector feeding
         self.grid.iter().for_each(|hex|{
-            row_handler[hex.x as usize][hex.y as usize] = Some(hex);
+            let (x,y) = hex.get_quad_coords_xy();
+            row_handler[x as usize][y as usize] = Some(hex);
         });
         row_handler
     }
