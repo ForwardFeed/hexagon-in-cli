@@ -2,7 +2,7 @@ use crate::{hexagon_block::HexagonBlock, translate_coords::translate_quad_to_hex
 
 use self::HexagonGridError::*;
 
-pub type QuadGridRow<'a> = Vec<Option<&'a HexagonBlock>>;
+pub type QuadGridRow<'a> = Vec<Option<&'a HexagonBlock<'a>>>;
 pub type QuadGrid<'a> = Vec<QuadGridRow<'a>>;
 
 #[derive(Debug)]
@@ -10,13 +10,13 @@ pub enum HexagonGridError {
     CannotAddAlreadyPresent
 }
 
-pub struct HexagonGrid{
-    grid: Vec<HexagonBlock>,
+pub struct HexagonGrid<'a>{
+    grid: Vec<HexagonBlock<'a>>,
     max_x: u16,
     max_y: u16
 }
 
-impl HexagonGrid{
+impl<'a> HexagonGrid<'a>{
     pub fn new() -> Self{
         HexagonGrid { 
             grid: Vec::new(),

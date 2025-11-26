@@ -35,6 +35,6 @@ fn grid_test() -> Result<(), HexagonGridError>{
     assert_eq!(*neighbors, [(1,1),(2,1), (3,3)]);
     
     assert_eq!(grid.get_hex_c_size(), (3,4));
-    println!("{:?}", grid.get_quad_grid());
+    //println!("{:?}", grid.get_quad_grid());
     Ok(())
 }

@@ -14,3 +14,9 @@ pub fn draw(grid_obj: &HexagonGrid){
         })
     });
 }
+
+
+pub fn try_draw(){
+    let buffer = String::new();
+    
+}
