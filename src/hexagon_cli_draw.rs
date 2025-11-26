@@ -10,6 +10,7 @@ pub fn draw(grid_obj: &HexagonGrid){
                 Some(x) => x,
                 None => return,
             };
+            block.text[1];
             
         })
     });
@@ -18,5 +19,5 @@ pub fn draw(grid_obj: &HexagonGrid){
 
 pub fn try_draw(){
     let buffer = String::new();
-    
+
 }
