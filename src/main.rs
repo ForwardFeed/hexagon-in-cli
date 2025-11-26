@@ -16,6 +16,8 @@ fn main(){
 fn grid_test() -> Result<(), HexagonGridError>{
     let mut grid = hexagon_in_cli::hexagon_grid::HexagonGrid::new();
     grid.add_block_quad_c(0,0)?;
-    grid.add_block_quad_c(0,0).expect_err("This shouldn't be adding a block at the same place.");
+    grid.add_block_quad_c(0,0).expect_err("This shouldn't be adding a block at the same coords.");
+    grid.add_block_hex_c(1, 1)?;
+    grid.add_block_quad_c(1,0).expect_err("This shouldn't be adding a block at the same coords especially with the translation system");
     Ok(())
 }
