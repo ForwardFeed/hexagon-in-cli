@@ -1,8 +1,6 @@
-use crate::hexagon_block::HexagonBlock;
+use crate::{hexagon_block::HexagonBlock, translate_coords::translate_quad_to_hex_coordinate};
 
 use self::HexagonGridError::*;
-
-type Coords = (u16, u16);
 
 #[derive(Debug)]
 pub enum HexagonGridError {
@@ -11,15 +9,6 @@ pub enum HexagonGridError {
 
 pub struct HexagonGrid{
     grid: Vec<HexagonBlock>
-}
-
-// this always compute "odds downwards"
-// this means that odd (non-pair) cols are downwards
-pub fn translate_quad_to_hex_coordinate(x: u16, y:u16) -> Coords{
-    (x ,u16::div_ceil(x, 2) + y)
-}
-pub fn translate_hex_to_quad_coordinate(x: u16, y:u16) -> Coords{
-    (x ,y - u16::div_ceil(x, 2))
 }
 
 impl HexagonGrid{
@@ -36,6 +25,17 @@ impl HexagonGrid{
             Some(_) => true,
             None => false,
         }
+    }
+
+    pub fn find_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+        self.grid.iter().filter(|block|{
+            u16::abs_diff(block.x, x) + u16::abs_diff(block.y, y) <= 2
+        }).collect::<Vec<&HexagonBlock>>()
+    }
+
+    pub fn find_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+        let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
+        self.find_neighbors_of_with_hex_c(tx, ty)
     }
 
     pub fn add_block_hex_c(&mut self, x: u16, y:u16) -> Result<(), HexagonGridError> {
