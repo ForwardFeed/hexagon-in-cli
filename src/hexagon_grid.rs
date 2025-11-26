@@ -2,6 +2,9 @@ use crate::{hexagon_block::HexagonBlock, translate_coords::translate_quad_to_hex
 
 use self::HexagonGridError::*;
 
+pub type QuadGridRow<'a> = Vec<Option<&'a HexagonBlock>>;
+pub type QuadGrid<'a> = Vec<QuadGridRow<'a>>;
+
 #[derive(Debug)]
 pub enum HexagonGridError {
     CannotAddAlreadyPresent
@@ -76,22 +79,17 @@ impl HexagonGrid{
         self.add_block_hex_c(tx, ty)
     }
 
-    pub fn get_quad_grid(&self) -> Vec<Vec<Option<&HexagonBlock>>>{
-        // row which handles the col within itself
-        let mut row_handler: Vec<Vec<Option<&HexagonBlock>>> = (0..self.max_x + 1).map(|_|{
+    pub fn get_quad_grid(&self) -> QuadGrid{
+        // vector initialization
+        let mut row_handler: QuadGrid = (0..self.max_x + 1).map(|_|{
             (0..self.max_y + 1).map(|_|{
                 None
-            }).collect::<Vec<Option<&HexagonBlock>>>()
-        }).collect::<Vec<Vec<Option<&HexagonBlock>>>>();
-
+            }).collect::<QuadGridRow>()
+        }).collect::<QuadGrid>();
+        // vector feeding
         self.grid.iter().for_each(|hex|{
             row_handler[hex.x as usize][hex.y as usize] = Some(hex);
         });
-        /* row_handler[3] = vec![];
-        for row_i in 0..self.max_x{
-            for (col_i)
-            row_handler.push(Vec::new());
-        } */
         row_handler
     }
     
