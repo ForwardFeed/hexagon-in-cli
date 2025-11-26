@@ -24,7 +24,7 @@ fn grid_test() -> Result<(), HexagonGridError>{
     grid.add_block_hex_c(3, 4)?;
     grid.add_block_hex_c(2, 1)?;
     grid.add_block_hex_c(3, 3)?;
-    // 1,1 has been added earlier
+    // neighbors list: 1,1 2,1, 3,3
     let neighbors = grid.get_neighbors_of_with_hex_c(2, 2);
     assert_eq!(neighbors.len(), 3);
 
