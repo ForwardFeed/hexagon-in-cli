@@ -1,15 +1,14 @@
 
-
+// expected to use hex grid coordinate system
+// any translation doesn't come from here
 pub struct HexagonBlock{
-    pub is_rendered: bool   
+    pub x: u16,
+    pub y: u16
 }
 
 
 impl HexagonBlock {
-    pub fn new() -> Self{
-        HexagonBlock { is_rendered: false }
-    }
-    pub fn toggle(&mut self){
-        self.is_rendered = ! self.is_rendered;
+    pub fn new(x: u16, y:u16) -> Self{
+        HexagonBlock { x, y }
     }
 }

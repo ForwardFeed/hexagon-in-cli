@@ -12,3 +12,4 @@ mod tests {
 mod hexagon_state;
 pub mod hexagon_grid;
 pub mod hexagon_block;
+pub mod hexagon_cli_draw;
