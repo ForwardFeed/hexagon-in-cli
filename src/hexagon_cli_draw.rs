@@ -2,11 +2,15 @@ use crate::hexagon_grid::HexagonGrid;
 
 
 
-pub fn draw(grid: &HexagonGrid){
-    let (g_x, g_y) = grid.get_hex_c_size();
-    for row_i in 0..g_x{
-        for col_i in 0..g_y{
+pub fn draw(grid_obj: &HexagonGrid){
+    let grid = grid_obj.get_quad_grid();
+    grid.iter().for_each(|row|{
+        row.iter().for_each(|col|{
+            let block = match col {
+                Some(x) => x,
+                None => return,
+            };
             
-        }
-    }
+        })
+    });
 }
