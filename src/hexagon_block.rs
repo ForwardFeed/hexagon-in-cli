@@ -1,9 +1,10 @@
+use std::fmt::Debug;
+
 use crate::{hexagon_text::HexagonText, translate_coords::translate_hex_to_quad_coordinate};
 
 
 // expected to use hex grid coordinate system
 // any translation doesn't come from here
-#[derive(Debug)]
 pub struct HexagonBlock<'a>{
     pub x: u16,
     pub y: u16,
@@ -20,5 +21,16 @@ impl <'a>HexagonBlock<'a> {
     }
     pub fn get_quad_coords_xy(&self) -> (u16, u16) {
         translate_hex_to_quad_coordinate(self.x, self.y)
+    }
+}
+
+
+impl<'a> Debug for HexagonBlock<'a>{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("HexagonBlock")
+            .field("x", &self.x)
+            .field("y", &self.y)
+            //.field("text", &self.text)
+            .finish()
     }
 }

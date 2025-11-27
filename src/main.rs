@@ -1,4 +1,4 @@
-use hexagon_in_cli::hexagon_grid::HexagonGridError;
+use hexagon_in_cli::{hexagon_cli_draw::draw, hexagon_grid::HexagonGridError};
 
 
 fn main(){
@@ -36,5 +36,6 @@ fn grid_test() -> Result<(), HexagonGridError>{
     
     assert_eq!(grid.get_hex_c_size(), (3,4));
     //println!("{:?}", grid.get_quad_grid());
+    draw(&grid);
     Ok(())
 }

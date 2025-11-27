@@ -79,7 +79,7 @@ impl<'a> HexagonGrid<'a>{
         self.add_block_hex_c(tx, ty)
     }
 
-    pub fn get_quad_grid(&self) -> QuadGrid<'_>{
+    pub fn get_hex_grid(&self) -> QuadGrid<'_>{
         // vector initialization
         let mut row_handler: QuadGrid = (0..self.max_x + 1).map(|_|{
             (0..self.max_y + 1).map(|_|{
