@@ -1,4 +1,4 @@
-use crate::{hexagon_block::HexagonBlock, translate_coords::translate_quad_to_hex_coordinate};
+use crate::{hexagon_block::HexagonBlock, translate_coords::{translate_hex_to_quad_coordinate, translate_quad_to_hex_coordinate}};
 
 use self::HexagonGridError::*;
 
@@ -13,7 +13,8 @@ pub enum HexagonGridError {
 pub struct HexagonGrid<'a>{
     grid: Vec<HexagonBlock<'a>>,
     max_x: u16,
-    max_y: u16
+    max_y: u16,
+    max_quad_y: u16,
 }
 
 impl<'a> HexagonGrid<'a>{
@@ -22,11 +23,16 @@ impl<'a> HexagonGrid<'a>{
             grid: Vec::new(),
             max_x: 0,
             max_y: 0,
+            max_quad_y: 0,
         }
     }
 
     pub fn get_hex_c_size(&self) -> (u16,u16){
         (self.max_x, self.max_y)
+    }
+
+    pub fn get_quad_c_size(&self) -> (u16,u16){
+        (self.max_x, self.max_quad_y)
     }
 
     fn find_block_with_hex_c(&self, x: u16, y:u16) -> bool{
@@ -38,7 +44,7 @@ impl<'a> HexagonGrid<'a>{
         }
     }
 
-    pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+    pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock<'_>>{
         self.grid.iter().filter(|block|{
             let diff = u16::abs_diff(block.x, x) + u16::abs_diff(block.y, y);
             match diff{
@@ -50,7 +56,7 @@ impl<'a> HexagonGrid<'a>{
         }).collect::<Vec<&HexagonBlock>>()
     }
 
-    pub fn get_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock>{
+    pub fn get_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock<'_>>{
         let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
         self.get_neighbors_of_with_hex_c(tx, ty)
     }
@@ -69,6 +75,10 @@ impl<'a> HexagonGrid<'a>{
                 if self.max_y < y{
                     self.max_y = y
                 }
+                let (_q_x, q_y) = translate_hex_to_quad_coordinate(x, y);
+                if self.max_quad_y < q_y{
+                    self.max_quad_y = q_y
+                }
                 Ok(())
             },
         }
@@ -79,17 +89,17 @@ impl<'a> HexagonGrid<'a>{
         self.add_block_hex_c(tx, ty)
     }
 
-    pub fn get_hex_grid(&self) -> QuadGrid<'_>{
+    pub fn get_quad_grid(&self) -> QuadGrid<'_>{
         // vector initialization
-        let mut row_handler: QuadGrid = (0..self.max_x + 1).map(|_|{
-            (0..self.max_y + 1).map(|_|{
+        let mut row_handler: QuadGrid = (0..self.max_quad_y + 1).map(|_|{
+            (0..self.max_x + 1).map(|_|{
                 None
             }).collect::<QuadGridRow>()
         }).collect::<QuadGrid>();
         // vector feeding
         self.grid.iter().for_each(|hex|{
             let (x,y) = hex.get_quad_coords_xy();
-            row_handler[x as usize][y as usize] = Some(hex);
+            row_handler[y as usize][x as usize] = Some(hex);
         });
         row_handler
     }

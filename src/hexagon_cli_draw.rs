@@ -14,8 +14,8 @@ pub fn draw(grid_obj: &HexagonGrid){
             
         })
     }); */
-    let grid = grid_obj.get_hex_grid();
-    let (x,y) = grid_obj.get_hex_c_size();
+    let grid = grid_obj.get_quad_grid();
+    let (x,y) = grid_obj.get_quad_c_size();
     let mut buffer = String::new();
     for (row_i, row) in grid.iter().enumerate(){
         for (col_i, col) in row.iter().enumerate(){
