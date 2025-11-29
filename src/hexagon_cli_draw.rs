@@ -21,15 +21,18 @@ pub fn draw(grid_obj: &HexagonGrid){
         for (col_i, col) in row.iter().enumerate(){
             let block = match col {
                 Some(x) => x,
-                None => continue,
+                None => {
+                    buffer += "        ";
+                    continue;
+                },
             };
             // the first row is a bit odd because unlike the rest it won't follow pattern
-            if row_i == 0{
-                buffer += "   _ _   "
-            } else {
-                buffer += "        "
-            }
-        } 
+            /* if row_i == 0{
+                
+            }*/
+            buffer += "   _ _  "
+        }
+        buffer += "\n"
     }
     println!("{buffer}, {grid:?}");
 }
