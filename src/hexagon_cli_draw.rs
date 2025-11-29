@@ -1,15 +1,21 @@
 use crate::hexagon_grid::HexagonGrid;
 
 struct HexagonLattices {
+    row_len: usize,
+    col_len: usize,
     top: Vec<bool>
 }
 
 pub fn draw(grid_obj: &HexagonGrid){
+    let quad_grid = grid_obj.get_quad_grid();
+    let (row_len, col_len) = grid_obj.get_quad_c_size();
+
     let mut lattices = HexagonLattices{
+        row_len,
+        col_len,
         top: vec![]
     };
-    let quad_grid = grid_obj.get_quad_grid();
-    let row_len = quad_grid.len() + 1;
+
     quad_grid.iter().for_each(|row|{
         row.iter().for_each(|col|{
             match col {
@@ -25,7 +31,7 @@ pub fn draw(grid_obj: &HexagonGrid){
     });
     let mut buffer = String::new();
     lattices.top.iter().enumerate().for_each(|(lat_i,&lattice)|{
-        if lat_i > 0 && lat_i % row_len == 0{
+        if lat_i > 0 && lat_i % lattices.row_len == 0{
             buffer += "\n"
         }
         if lattice{

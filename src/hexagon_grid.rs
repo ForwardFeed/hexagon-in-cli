@@ -27,12 +27,12 @@ impl<'a> HexagonGrid<'a>{
         }
     }
 
-    pub fn get_hex_c_size(&self) -> (u16,u16){
-        (self.max_x, self.max_y)
+    pub fn get_hex_c_size(&self) -> (usize,usize){
+        ((self.max_x + 1) as usize, (self.max_y + 1) as usize)
     }
 
-    pub fn get_quad_c_size(&self) -> (u16,u16){
-        (self.max_x, self.max_quad_y)
+    pub fn get_quad_c_size(&self) -> (usize,usize){
+        ((self.max_x + 1) as usize, (self.max_quad_y + 1) as usize)
     }
 
     fn find_block_with_hex_c(&self, x: u16, y:u16) -> bool{

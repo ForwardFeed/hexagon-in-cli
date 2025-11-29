@@ -34,7 +34,8 @@ fn grid_test() -> Result<(), HexagonGridError>{
     
     assert_eq!(*neighbors, [(1,1),(2,1), (3,3)]);
     
-    assert_eq!(grid.get_hex_c_size(), (3,4));
+    // width is 4, but starting from 1 not zero, (I know it's a bit upsetting)
+    assert_eq!(grid.get_hex_c_size(), (4,5));
     //println!("{:?}", grid.get_quad_grid());
     draw(&grid);
     Ok(())
