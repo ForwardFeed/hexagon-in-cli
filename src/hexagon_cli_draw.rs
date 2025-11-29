@@ -1,8 +1,41 @@
 use crate::hexagon_grid::HexagonGrid;
 
-
+struct HexagonLattices {
+    top: Vec<bool>
+}
 
 pub fn draw(grid_obj: &HexagonGrid){
+    let mut lattices = HexagonLattices{
+        top: vec![]
+    };
+    let quad_grid = grid_obj.get_quad_grid();
+    let row_len = quad_grid.len() + 1;
+    quad_grid.iter().for_each(|row|{
+        row.iter().for_each(|col|{
+            match col {
+                Some(_) => {
+                    lattices.top.push(true);
+                },
+                None => {
+                    lattices.top.push(false);
+                },
+            };
+            
+        });
+    });
+    let mut buffer = String::new();
+    lattices.top.iter().enumerate().for_each(|(lat_i,&lattice)|{
+        if lat_i > 0 && lat_i % row_len == 0{
+            buffer += "\n"
+        }
+        if lattice{
+            buffer += "   _ _   "
+        } else {
+            buffer += "         "
+        }
+    });
+    buffer += "\n";
+    println!("{}", buffer);
     /* let grid = grid_obj.get_quad_grid();
     grid.iter().for_each(|row|{
         row.iter().for_each(|col|{
@@ -14,7 +47,7 @@ pub fn draw(grid_obj: &HexagonGrid){
             
         })
     }); */
-    let grid = grid_obj.get_quad_grid();
+    /* let grid = grid_obj.get_quad_grid();
     let (x,y) = grid_obj.get_quad_c_size();
     let mut buffer = String::new();
     for (row_i, row) in grid.iter().enumerate(){
@@ -30,9 +63,9 @@ pub fn draw(grid_obj: &HexagonGrid){
             /* if row_i == 0{
                 
             }*/
-            buffer += "   _ _  "
+            buffer += "   _ _   "
         }
         buffer += "\n"
     }
-    println!("{buffer}, {grid:?}");
+    println!("{buffer}, {grid:?}"); */
 }
