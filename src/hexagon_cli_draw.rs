@@ -77,13 +77,13 @@ pub fn draw(grid_obj: &HexagonGrid){
         buffer.replace_range(bot_right_t_2..bot_right_t_2+1, "/"); 
 
         let text_1_t = top_t + (row_length_chars_with_endl * 1) - 1;
-        buffer.replace_range(text_1_t..text_1_t+5, "12345");
+        buffer.replace_range(text_1_t..text_1_t+5, block.text[0]);
 
         let text_2_t = top_t + (row_length_chars_with_endl * 2) - 2;
-        buffer.replace_range(text_2_t..text_2_t+7, "1234567");
+        buffer.replace_range(text_2_t..text_2_t+7, block.text[1]);
 
         let text_3_t = top_t + (row_length_chars_with_endl * 3) - 2;
-        buffer.replace_range(text_3_t..text_3_t+7, "1234567");
+        buffer.replace_range(text_3_t..text_3_t+7, block.text[2]);
     });
     /* for y in 0..col_len{
         for x in 0..row_len{

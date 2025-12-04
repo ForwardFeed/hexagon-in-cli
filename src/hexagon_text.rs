@@ -11,9 +11,9 @@ pub struct HexagonText<'a>{
 impl<'a>  HexagonText<'a> {
     pub fn new() -> Self {
         HexagonText{
-            line_0: "     ",
-            line_1: "       ",
-            line_2: "       ",
+            line_0: "12345",
+            line_1: "abcdefg",
+            line_2: "1234567",
         }
     }
     pub fn with_lines(line_0: &'a str, line_1: &'a str, line_2: &'a str) -> Self{
