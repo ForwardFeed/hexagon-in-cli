@@ -11,7 +11,7 @@ pub enum HexagonGridError {
 }
 
 pub struct HexagonGrid<'a>{
-    grid: Vec<HexagonBlock<'a>>,
+    pub grid: Vec<HexagonBlock<'a>>,
     max_x: u16,
     max_y: u16,
     max_quad_y: u16,
