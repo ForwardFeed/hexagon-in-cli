@@ -1,41 +1,10 @@
-use std::fmt::format;
-
 use crate::hexagon_grid::HexagonGrid;
 
 
-fn stage_1(a: bool) -> &'static str{
-    if a{
-        " _ _ "
-    } else {
-        "     "
-    }
-}
-/* 
-fn stage_2(b: bool){
-    let x  = "/ \\";
-}
-
-fn stage_3(){
-    let x = "/  \\__";
-} */
 
 pub fn draw(grid_obj: &HexagonGrid){
-    let quad_grid = grid_obj.get_quad_grid();
     let (row_len, col_len) = grid_obj.get_quad_c_size();
     
-  /*   for row in quad_grid{
-        for maybe_block in row{
-            match maybe_block {
-                Some(block) => {
-                    buffer = format!("{buffer} [{}, {}]", block.x, block.y)
-                },
-                None => {
-                    buffer = format!("{buffer} [    ]")
-                },
-            }
-        }
-        buffer += "\n"
-    } */
     let row_length_chars = if row_len % 2 == 0{
         row_len.div_ceil(2) * 14
     } else {
@@ -48,7 +17,7 @@ pub fn draw(grid_obj: &HexagonGrid){
         let (x, y) = block.get_quad_coords_xy();
         let is_pair = x % 2 == 0;
         let x_offset = ((7 * x) + 3) as usize + if is_pair{0}else{
-            (row_length_chars_with_endl * 2)
+            row_length_chars_with_endl * 2
         };
         let y_offset =  4 * y * row_length_chars_with_endl;
         let top_t = x_offset + y_offset;
@@ -85,91 +54,6 @@ pub fn draw(grid_obj: &HexagonGrid){
         let text_3_t = top_t + (row_length_chars_with_endl * 3) - 2;
         buffer.replace_range(text_3_t..text_3_t+7, block.text[2]);
     });
-    /* for y in 0..col_len{
-        for x in 0..row_len{
-        }
-    } */
+ 
     println!("{buffer}");
-  /*   
-
-    let mut lattices = HexagonLattices{
-        row_len,
-        col_len,
-        top: vec![]
-    };
-
-    quad_grid.iter().for_each(|row|{
-        row.iter().for_each(|col|{
-            match col {
-                Some(_) => {
-                    lattices.top.push(true);
-                },
-                None => {
-                    lattices.top.push(false);
-                },
-            };
-            
-        });
-    });
-    
-    
-    for row_i in 0..lattices.col_len{
-        for stage_i in 0..2{
-            if row_i > 0 && row_i % lattices.row_len == 0{
-                buffer += "\n"
-            }
-            let x = lattices.top[row_i];
-            buffer += match stage_i {
-                0 => stage_1(x),
-                1 => {
-                    ""
-                }
-                _ => panic!("unknown stage")
-            }
-        }
-    } */
-    /* lattices.top.iter().enumerate().for_each(|(lat_i,&lattice)|{
-        if lat_i > 0 && lat_i % lattices.row_len == 0{
-            buffer += "\n"
-        }
-        if lattice{
-            buffer += 
-        } else {
-            buffer += "         "
-        }
-    });
-    buffer += "\n";
-    println!("{}", buffer); */
-    /* let grid = grid_obj.get_quad_grid();
-    grid.iter().for_each(|row|{
-        row.iter().for_each(|col|{
-            let block = match col {
-                Some(x) => x,
-                None => return,
-            };
-            block.text[1];
-            
-        })
-    }); */
-    /* let grid = grid_obj.get_quad_grid();
-    let (x,y) = grid_obj.get_quad_c_size();
-    let mut buffer = String::new();
-    for (row_i, row) in grid.iter().enumerate(){
-        for (col_i, col) in row.iter().enumerate(){
-            let block = match col {
-                Some(x) => x,
-                None => {
-                    buffer += "        ";
-                    continue;
-                },
-            };
-            // the first row is a bit odd because unlike the rest it won't follow pattern
-            /* if row_i == 0{
-                
-            }*/
-            buffer += "   _ _   "
-        }
-        buffer += "\n"
-    }
-    println!("{buffer}, {grid:?}"); */
 }
