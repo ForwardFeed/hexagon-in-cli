@@ -75,21 +75,35 @@ impl<'a> HexagonGrid<'a>{
             false => {
                 self.grid.push(HexagonBlock::new(x, y));
                 // modify if must, the grid size tracker
-                if self.max_x < x{
-                    self.max_x = x
-                }
-                if self.max_y < y{
-                    self.max_y = y
-                }
-                let (_q_x, q_y) = translate_hex_to_quad_coordinate(x, y);
-                if self.max_quad_y < q_y{
-                    self.max_quad_y = q_y
-                }
+                self.adapt_grid_size_tracker(x,y);
                 Ok(())
             },
         }
     }
 
+    fn adapt_grid_size_tracker(&mut self, x: u16, y:u16){
+          if self.max_x < x{
+            self.max_x = x
+        }
+        if self.max_y < y{
+            self.max_y = y
+        }
+        let (_q_x, q_y) = translate_hex_to_quad_coordinate(x, y);
+        if self.max_quad_y < q_y{
+            self.max_quad_y = q_y
+        }
+}
+    pub fn add_block(&mut self, block: HexagonBlock<'a>) -> Result<&mut Self, HexagonGridError>{
+        match self.find_block_with_hex_c(block.x,block.y) {
+            true => {
+                return Err(CannotAddAlreadyPresent)
+            },
+            false => {
+                self.grid.push(block);
+            }
+        }
+        Ok(self)
+    }
     pub fn add_block_quad_c(&mut self, x: u16, y:u16) -> Result<(), HexagonGridError>{
         let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
         self.add_block_hex_c(tx, ty)
