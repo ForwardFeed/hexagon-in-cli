@@ -1,8 +1,8 @@
 /**
- * Creates a hexagon block, with quad coordinate (hence the _q)
+ * Creates a hexagon block, with hex coordinate (hence the _h)
  */
 #[macro_export]
-macro_rules! hexblock_q {
+macro_rules! hexblock_h {
     ($x:expr, $y:expr) => {
         hexagon_in_cli::block::HexagonBlock::new($x, $y)
     };

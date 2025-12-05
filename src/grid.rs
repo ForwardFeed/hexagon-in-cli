@@ -2,7 +2,7 @@ use crate::{block::HexagonBlock, translate_coords::{translate_hex_to_quad_coordi
 
 use self::HexagonGridError::*;
 
-pub type QuadGridRow<'a> = Vec<Option<&'a HexagonBlock<'a>>>;
+pub type QuadGridRow<'a> = Vec<Option<&'a HexagonBlock>>;
 pub type QuadGrid<'a> = Vec<QuadGridRow<'a>>;
 
 #[derive(Debug)]
@@ -10,14 +10,14 @@ pub enum HexagonGridError {
     CannotAddAlreadyPresent
 }
 
-pub struct HexagonGrid<'a>{
-    pub grid: Vec<HexagonBlock<'a>>,
+pub struct HexagonGrid{
+    pub grid: Vec<HexagonBlock>,
     max_x: u16,
     max_y: u16,
     max_quad_y: u16,
 }
 
-impl<'a> HexagonGrid<'a>{
+impl HexagonGrid{
     pub fn new() -> Self{
         HexagonGrid { 
             grid: Vec::new(),
@@ -44,7 +44,7 @@ impl<'a> HexagonGrid<'a>{
         }
     }
 
-    pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock<'_>>{
+    pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock>{
         self.grid.iter().filter(|block|{
             let x_diff = u16::abs_diff(block.x, x);
             if x_diff > 1{
@@ -62,7 +62,7 @@ impl<'a> HexagonGrid<'a>{
         }).collect::<Vec<&HexagonBlock>>()
     }
 
-    pub fn get_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock<'_>>{
+    pub fn get_neighbors_of_with_quad_c(&mut self, x: u16, y:u16) -> Vec<&HexagonBlock>{
         let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
         self.get_neighbors_of_with_hex_c(tx, ty)
     }
@@ -93,7 +93,7 @@ impl<'a> HexagonGrid<'a>{
             self.max_quad_y = q_y
         }
 }
-    pub fn add_block(&mut self, block: HexagonBlock<'a>) -> Result<&mut Self, HexagonGridError>{
+    pub fn add_block(&mut self, block: HexagonBlock) -> Result<&mut Self, HexagonGridError>{
         match self.find_block_with_hex_c(block.x,block.y) {
             true => {
                 return Err(CannotAddAlreadyPresent)

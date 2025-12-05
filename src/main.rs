@@ -1,4 +1,4 @@
-use hexagon_in_cli::{cli_draw::draw, grid::HexagonGridError, hexblock_q};
+use hexagon_in_cli::{cli_draw::draw, grid::HexagonGridError, hexblock_h};
 
 
 fn main(){
@@ -22,10 +22,8 @@ fn grid_test() -> Result<(), HexagonGridError>{
 
     grid.add_block_hex_c(2, 2)?;
     grid.add_block_hex_c(3, 4)?;
-    grid.add_block_hex_c(2, 1)?;
-    //grid.add_block_hex_c(3, 3)?;
-    grid.add_block(hexblock_q!(3,3,"3-3"));
-
+    grid.add_block(hexblock_h!(2,1,"2-1"))?
+        .add_block(hexblock_h!(3,3, "aaaaaaaaaaaaaa", "4"))?;
     let neighbors  =
         grid
             .get_neighbors_of_with_hex_c(2, 2)

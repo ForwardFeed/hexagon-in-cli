@@ -4,18 +4,18 @@ use crate::{text::HexagonText, translate_coords::translate_hex_to_quad_coordinat
 
 
 // expected to use hex grid coordinate system
-pub struct HexagonBlock<'a>{
+pub struct HexagonBlock{
     pub x: u16,
     pub y: u16,
-    pub text: HexagonText<'a>
+    pub text: HexagonText
 }
 
 
-impl <'a>HexagonBlock<'a> {
+impl HexagonBlock {
     pub fn new(x: u16, y:u16) -> Self{
         HexagonBlock { x, y, text: HexagonText::new() }
     }
-    pub fn new_with_text(x: u16, y:u16, text: HexagonText<'a>) -> Self{
+    pub fn new_with_text(x: u16, y:u16, text: HexagonText) -> Self{
         HexagonBlock { x, y, text }
     }
     pub fn get_quad_coords_xy(&self) -> (usize, usize) {
@@ -25,7 +25,7 @@ impl <'a>HexagonBlock<'a> {
 }
 
 
-impl<'a> Debug for HexagonBlock<'a>{
+impl Debug for HexagonBlock{
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("HexagonBlock")
             .field("x", &self.x)
