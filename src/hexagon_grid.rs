@@ -46,13 +46,19 @@ impl<'a> HexagonGrid<'a>{
 
     pub fn get_neighbors_of_with_hex_c(&self, x: u16, y:u16) -> Vec<&HexagonBlock<'_>>{
         self.grid.iter().filter(|block|{
-            let diff = u16::abs_diff(block.x, x) + u16::abs_diff(block.y, y);
-            match diff{
-                0 => false,// because it found it self
-                1 => true,
-                2 => true,
-                _ => false
+            let x_diff = u16::abs_diff(block.x, x);
+            if x_diff > 1{
+                return false;
             }
+            let y_diff = u16::abs_diff(block.y, y);
+            if y_diff > 1 {
+                return false;
+            }
+            // find self
+            if x_diff == 0 && y_diff == 0{
+                return false;
+            }
+            return true;
         }).collect::<Vec<&HexagonBlock>>()
     }
 
