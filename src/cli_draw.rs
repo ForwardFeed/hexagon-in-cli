@@ -1,4 +1,4 @@
-use crate::hexagon_grid::HexagonGrid;
+use crate::grid::HexagonGrid;
 
 
 

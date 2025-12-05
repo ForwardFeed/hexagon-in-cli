@@ -1,4 +1,4 @@
-use hexagon_in_cli::{hexagon_cli_draw::draw, hexagon_grid::HexagonGridError};
+use hexagon_in_cli::{cli_draw::draw, grid::HexagonGridError};
 
 
 fn main(){
@@ -14,7 +14,7 @@ fn main(){
 }
 
 fn grid_test() -> Result<(), HexagonGridError>{
-    let mut grid = hexagon_in_cli::hexagon_grid::HexagonGrid::new();
+    let mut grid = hexagon_in_cli::grid::HexagonGrid::new();
     grid.add_block_quad_c(0,0)?;
     grid.add_block_quad_c(0,0).expect_err("This shouldn't be adding a block at the same coords.");
     grid.add_block_hex_c(1, 1)?;

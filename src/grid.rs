@@ -1,4 +1,4 @@
-use crate::{hexagon_block::HexagonBlock, translate_coords::{translate_hex_to_quad_coordinate, translate_quad_to_hex_coordinate}};
+use crate::{block::HexagonBlock, translate_coords::{translate_hex_to_quad_coordinate, translate_quad_to_hex_coordinate}};
 
 use self::HexagonGridError::*;
 

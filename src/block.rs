@@ -1,6 +1,6 @@
 use std::fmt::Debug;
 
-use crate::{hexagon_text::HexagonText, translate_coords::translate_hex_to_quad_coordinate};
+use crate::{text::HexagonText, translate_coords::translate_hex_to_quad_coordinate};
 
 
 // expected to use hex grid coordinate system

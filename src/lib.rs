@@ -1,5 +1,6 @@
-pub mod hexagon_grid;
-pub mod hexagon_block;
-pub mod hexagon_cli_draw;
+pub mod grid;
+pub mod block;
+pub mod cli_draw;
 pub mod translate_coords;
-pub mod hexagon_text;
+pub mod text;
+pub mod macros;
