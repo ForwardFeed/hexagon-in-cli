@@ -1,3 +1,5 @@
+use hexagons_in_cli::hexblock_q;
+
 
 fn main(){
     //create_hexagon()
@@ -38,7 +40,6 @@ fn grid_test() -> Result<(), hexagons_in_cli::grid::HexagonGridError>{
     let mut block = hexagons_in_cli::hexblock_q!(0,2, "12345", "1234567", &format!("don't worry it's trimed automatically"));
     block.text[2] = hexagons_in_cli::text::format_string("please worry it's NOT trimed automatically this way, you have to care for it yourself".to_string(), 7);
     grid.add_block(block)?;
-
     hexagons_in_cli::cli_draw::draw(&grid);
     Ok(())
 }

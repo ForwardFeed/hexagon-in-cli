@@ -10,14 +10,14 @@ macro_rules! hexblock_h {
         hexagons_in_cli::block::HexagonBlock{
             x: $x,
             y: $y,
-            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, "       ", "       ")
+            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, "       ".into(), "       ".into())
         }
     };
     ($x:expr, $y:expr, $line_0: expr, $line_1: expr) => {
         hexagons_in_cli::block::HexagonBlock{
             x: $x,
             y: $y,
-            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, $line_1, "       ")
+            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, $line_1, "       ".into())
         }
     };
     ($x:expr, $y:expr, $line_0: expr, $line_1: expr, $line_2: expr) => {
@@ -41,14 +41,14 @@ macro_rules! hexblock_q {
         hexagons_in_cli::block::HexagonBlock{
             x: $x,
             y: $y + u16::div_ceil($x, 2),
-            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, "       ", "       ")
+            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, "       ".into(), "       ".into())
         }
     };
     ($x:expr, $y:expr, $line_0: expr, $line_1: expr) => {
         hexagons_in_cli::block::HexagonBlock{
             x: $x,
             y: $y + u16::div_ceil($x, 2),
-            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, $line_1, "       ")
+            text: hexagons_in_cli::text::HexagonText::with_lines($line_0, $line_1, "       ".into())
         }
     };
     ($x:expr, $y:expr, $line_0: expr, $line_1: expr, $line_2: expr) => {
