@@ -14,11 +14,10 @@ Look at he grid_example.txt to see what I mean.
 It's also thought to be only used in a unsigned positive world, didn't planned to work in a signed coordinate world.
 
 If you want to play with the library you can clone and play inside the main.rs, where I made a questionable test ground.
-Speaking of testing, I didn't. It looked to work so I never tempted the eternal slumber of making tests, maybe with mind altering substances or money (same thing) in the future.
+Speaking of testing, I didn't. It looked to work so I never tempted the eternal slumber of making tests
+maybe with mind altering substances or money (same thing) in the future.
 
 ## How it works (for real this time)
-
-
 
 ```rs
 // Make yourself a grid, as mentionned earlier those hexagons are to be 
@@ -53,7 +52,9 @@ hexagon_in_cli::cli_draw::draw(&grid);
 
 //Honorable mentions:
 
-// getting neighbors of an hex, actually the reason I kept using that hex coordinate system under the hood (I swear it's just barely mathematically better than just keeping the grid as an oddly shaped square made grid...)
+// getting neighbors of an hex.
+// actually the reason I kept using that hex coordinate system under the hood
+// (I swear it's just barely mathematically better than just keeping the grid as an oddly shaped square made grid...)
 grid.get_neighbors_of_with_hex_c(x,y);
 
 // get the size of the grid
@@ -61,7 +62,8 @@ grid.get_quad_c_size() // or get_hex_c_size
 
 // okay, so internally, I represented the grid into an array
 // which I believed to be useful, because I originally wanted to draw on the terminal another way
-// the way hexagon_in_cli::cli_draw::draw() works is that by making a buffer of spaces and endlines, then iterating over the vector and add text where it has to be added.
+// the way hexagon_in_cli::cli_draw::draw() works is that by making a buffer of spaces and endlines.
+// Then iterating over the vector and add text where it has to be added.
 // which works fine, but ultimately it's not perfect as I wished to do it iteratively and change the way I store data
 grid.get_quad_grid()
 
@@ -69,5 +71,7 @@ grid.get_quad_grid()
 grid.grid
 ```
 
-You may already feel it, but I was quite disapointed with myself with that work, because it took more time that I should by pursuing fruitless optimization, but published it this time.
+You may already feel it, but I was quite disapointed with myself with that work.
+Because it took more time than it should, by pursuing fruitless optimization.
+At least I published it this time.
 Also there's probably an unspoken amount of bugs which I never cared to look for.
