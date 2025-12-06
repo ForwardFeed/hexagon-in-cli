@@ -100,6 +100,7 @@ impl HexagonGrid{
                 return Err(CannotAddAlreadyPresent)
             },
             false => {
+                self.adapt_grid_size_tracker(block.x,block.y);
                 self.grid.push(block);
             }
         }
