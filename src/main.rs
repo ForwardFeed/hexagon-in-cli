@@ -35,9 +35,10 @@ fn grid_test() -> Result<(), hexagons_in_cli::grid::HexagonGridError>{
     // width is 4, but starting from 1 not zero, (I know it's a bit upsetting)
     assert_eq!(grid.get_hex_c_size(), (4,5));
     //println!("{:?}", grid.get_quad_grid());
-    let mut block = hexagons_in_cli::hexblock_q!(0,2, "12345", "1234567", "don't worry it's trimed automatically");
+    let mut block = hexagons_in_cli::hexblock_q!(0,2, "12345", "1234567", &format!("don't worry it's trimed automatically"));
     block.text[2] = hexagons_in_cli::text::format_string("please worry it's NOT trimed automatically this way, you have to care for it yourself".to_string(), 7);
     grid.add_block(block)?;
+
     hexagons_in_cli::cli_draw::draw(&grid);
     Ok(())
 }

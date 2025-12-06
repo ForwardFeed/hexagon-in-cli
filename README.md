@@ -37,7 +37,7 @@ grid.add_block_quad_c(1,0).expect_err("This shouldn't be adding a block at the s
 // Oh yeah I mentionned that you could write into the hexagons
 // I made some macros for that (hexblock_q for quad, hexblock_h for hex)
 // Please notice that I use the _q(uad coordinate here)
-let mut block = hexagons_in_cli::hexblock_q!(0,2, "12345", "1234567", "don't worry it's trimed automatically");
+let mut block = hexagons_in_cli::hexblock_q!(0,2, "12345", "1234567", &format!("don't worry it's trimed automatically"));
 // about this block.text[2], I gotta explain how this text work
 // there's 3 lines, hence [0] [1] [2], anything else and it will panic, also there's character limits to know if you modify that way
 // [0] => 5 char max, [1] => 7 char max, [2] => 7 char max

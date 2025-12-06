@@ -16,11 +16,11 @@ impl  HexagonText {
             line_2: "       ".to_string(),
         }
     }
-    pub fn with_lines(line_0: &str, line_1: &str, line_2: &str) -> Self{
+    pub fn with_lines<S: Into<String>>(line_0: S, line_1: S, line_2: S) -> Self{
         HexagonText {
-            line_0: format_string(line_0.to_string(), 5),
-            line_1: format_string(line_1.to_string(),7),
-            line_2: format_string(line_2.to_string(), 7) 
+            line_0: format_string(line_0.into(), 5),
+            line_1: format_string(line_1.into(),7),
+            line_2: format_string(line_2.into(), 7) 
         }
     }
 }
