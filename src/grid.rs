@@ -92,7 +92,8 @@ impl HexagonGrid{
         if self.max_quad_y < q_y{
             self.max_quad_y = q_y
         }
-}
+    }
+    
     pub fn add_block(&mut self, block: HexagonBlock) -> Result<&mut Self, HexagonGridError>{
         match self.find_block_with_hex_c(block.x,block.y) {
             true => {
@@ -104,6 +105,7 @@ impl HexagonGrid{
         }
         Ok(self)
     }
+    
     pub fn add_block_quad_c(&mut self, x: u16, y:u16) -> Result<(), HexagonGridError>{
         let (tx, ty) = translate_quad_to_hex_coordinate(x, y);
         self.add_block_hex_c(tx, ty)

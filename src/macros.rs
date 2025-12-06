@@ -24,7 +24,7 @@ macro_rules! hexblock_h {
         hexagon_in_cli::block::HexagonBlock{
             x: $x,
             y: $y,
-            text: hexagon_in_cli::text::HexagonText::with_lines($line_0, $line_1, $line_2: tt)
+            text: hexagon_in_cli::text::HexagonText::with_lines($line_0, $line_1, $line_2)
         }
     };
 }
@@ -55,7 +55,7 @@ macro_rules! hexblock_q {
         hexagon_in_cli::block::HexagonBlock{
             x: $x,
             y: $y + u16::div_ceil($x, 2),
-            text: hexagon_in_cli::text::HexagonText::with_lines($line_0, $line_1, $line_2: tt)
+            text: hexagon_in_cli::text::HexagonText::with_lines($line_0, $line_1, $line_2)
         }
     };
 }

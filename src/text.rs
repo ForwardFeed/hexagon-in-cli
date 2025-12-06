@@ -51,7 +51,7 @@ impl <'a> IndexMut<usize> for HexagonText{
 }
 
 
-fn format_string(str: String, max_len: usize) -> String{
+pub fn format_string(str: String, max_len: usize) -> String{
     match str.len(){
         len if len == max_len=> {
             str
