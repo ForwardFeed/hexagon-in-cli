@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "hexagon_in_cli"
+name = "hexagons_in_cli"
 version = "0.1.0"
