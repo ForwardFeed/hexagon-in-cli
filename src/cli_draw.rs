@@ -45,8 +45,6 @@ pub fn draw(grid_obj: &HexagonGrid){
         buffer.replace_range(bot_right_t_1..bot_right_t_1+1, "/");
         buffer.replace_range(bot_right_t_2..bot_right_t_2+1, "/"); 
 
-        println!("{},{},{}", block.text[0].len(), block.text[1].len(), block.text[2].len());
-
         let text_1_t = top_t + (row_length_chars_with_endl * 1) - 1;
         buffer.replace_range(text_1_t..text_1_t+5, block.text[0].as_str());
 
